@@ -1,102 +1,82 @@
+
 # Library-DBMS-project
+
 This project is a complete Library Management System built in C, designed to simulate how a simple database management system operates internally. Instead of relying on a traditional SQL database, the system uses dynamic data structures, indexing techniques, and file storage to manage books, members, library cards, and borrowing operations.
-The project  focuses on applying database concepts at a low level, including storage management, indexing, concurrency control, and CRUD operations.
-Key Features
-Book Management
 
-Add, delete, update, and display books
+The project focuses on applying database concepts at a low level, including storage management, indexing, concurrency control, and CRUD operations.
 
-Stored in a binary search tree for sorted access
+## Key Features
 
-Persistent storage using CSV files
+### Book Management
 
-Member Management
+* Add, delete, update, and display books
+* Stored in a binary search tree for sorted access
+* Persistent storage using CSV files
 
-Register, update, delete, and display members
+### Member Management
 
-Fast lookup using hash-based indexing (linear probing)
+* Register, update, delete, and display members
+* Fast lookup using hash-based indexing (linear probing)
+* Linked list storage for member records
+* Duplicate ID validation
 
-Linked list storage for member records
+### Library Card System
 
-Duplicate ID validation
+* Issue a library card to an existing member
+* Enforces one-card-per-member rule
+* Update and delete card records
 
-Library Card System
+### Borrow and Return Operations
 
-Issue a library card to an existing member
+* Record borrowing operations
+* Validate member and book existence
+* Prevent duplicate borrowing
+* Record book returns
 
-Enforces one-card-per-member rule
+## System Architecture
 
-Update and delete card records
+The system is implemented using:
 
-Borrow and Return Operations
+* Binary Search Trees (BST)
+* Singly Linked Lists
+* Hash Table Indexing with linear probing
+* Mutex-based concurrency for borrow/return operations
+* CSV file I/O for persistence
 
-Maintain a list of borrowed books
+## Project Structure
 
-Validate member and book existence before borrowing
+```
+Library-DBMS-project/
+│
+├── src/
+│   └── db_prog_final-after.c
+│
+├── documentation/
+│   └── Report.docx
+│
+└── README.md
+```
 
-Prevent multiple borrowing of the same book by the same member
+## How to Compile and Run
 
-Concurrency Control
+Compile the program using GCC with pthread:
 
-Basic concurrency implemented using pthread mutex locks
-
-Ensures thread-safe operations during borrow and return actions
-
-Persistent Storage
-
-All records stored as CSV:
-
-books.csv
-
-members.csv
-
-borrowed.csv
-
-cards.csv
-
-Data is loaded at program startup and saved at termination
-
-
-
-The project simulates several key DBMS components:
-
-Execution Engine: Each menu option maps to a function that performs the required operation (insert, delete, update, search).
-
-Storage Manager: CSV file handling using standard C file I/O.
-
-Buffer/Data Manager: In-memory structures such as BSTs, linked lists, and hash tables.
-
-Indexing: Linear probing hash table for member lookups.
-
-Concurrency Control: Mutex-based locking during critical operations.
-
-Logging and Recovery (Simplified): Data is persisted to files after updates.
-
-Although not all components of a commercial DBMS are implemented, this project provides a practical demonstration of how database operations can be simulated at a low level.
-
-Binary search trees for book management
-
-Linked lists for members, cards, and borrow records
-
-Hash table indexing for fast member searches
-
-Mutex locks for basic concurrency control
-
-CSV-based persistent storage
-
-Manual implementation of constraints (unique IDs, foreign key checks)
-
-Dynamic memory management using malloc and free
-
-
-How to Compile and Run
-
-Compile the program using GCC with pthread support:
+```
 gcc db_prog_final-after.c -o library_system -lpthread
+```
 
 Run the program:
 
+```
 ./library_system
-
+```
 
 CSV files will be created automatically if they do not exist.
+
+## Documentation
+
+The full written report detailing system design, data structures, and DBMS concepts is available in:
+
+```
+documentation/Report.docx
+```
